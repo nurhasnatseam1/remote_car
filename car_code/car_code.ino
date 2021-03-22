@@ -2,7 +2,7 @@
 int md_inp_1=11;
 int md_inp_2=10;
 int md_inp_3=9;
-int md_inp_4=8;
+int md_inp_4=6;
 
 
 char command = 'S';
@@ -22,13 +22,12 @@ void setup() {
   // put your setup code here, to run once:
   setPinModeOutput();
   Serial.begin(9600);
-  //rmAntiClock(255);
 
 }
 
 
 void loop() {
-  // put your main code here, to run repeatedly:
+  
   if(Serial.available()>0){
     processResult();
   }
@@ -73,6 +72,8 @@ void rmAntiClock(float rightAntiClockVelocity){
   };
 
 void lmClock(float leftClockVelocity){
+  Serial.print("leftClockVelocity: \t");
+  Serial.println(leftClockVelocity);
   analogWrite(md_inp_1,leftClockVelocity);
   analogWrite(md_inp_2,0);
   };
@@ -122,6 +123,7 @@ void motorsWrite(float leftVelocity,float rightVelocity){
     Serial.println("turning Right");
     rightVelocity *=-1;
     turnRight(leftVelocity,rightVelocity);
+    
   }else if (!leftClockWise && rightClockWise){
     Serial.println("turning left");
     leftVelocity *=-1;
