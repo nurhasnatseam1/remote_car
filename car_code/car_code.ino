@@ -22,6 +22,8 @@ void setup() {
   // put your setup code here, to run once:
   setPinModeOutput();
   Serial.begin(9600);
+  //rmAntiClock(255);
+
 }
 
 
@@ -65,6 +67,8 @@ void rmClock(float rightClockVelocity){
   };
 void rmAntiClock(float rightAntiClockVelocity){
   analogWrite(md_inp_3,0);
+  Serial.print("rightAntiClockVelocity: \t");
+  Serial.println(rightAntiClockVelocity);
   analogWrite(md_inp_4,rightAntiClockVelocity);
   };
 
@@ -97,7 +101,7 @@ void turnRight(float leftClockVelocity,float rightAntiClockVelocity){
   }
 
 void turnLeft(float leftAntiClockVelocity,float rightClockVelocity){
-  lmClock(leftAntiClockVelocity);
+  lmAntiClock(leftAntiClockVelocity);
   rmClock(rightClockVelocity);
   }
 
@@ -106,6 +110,8 @@ void turnLeft(float leftAntiClockVelocity,float rightClockVelocity){
 void motorsWrite(float leftVelocity,float rightVelocity){
   boolean leftClockWise = leftVelocity >0;
   boolean rightClockWise= rightVelocity > 0;
+  Serial.print(leftClockWise);
+  Serial.println(rightClockWise);
   if(leftClockWise && rightClockWise){
     moveForward(leftVelocity,rightVelocity);
   }else if(!leftClockWise && !rightClockWise){
@@ -113,9 +119,11 @@ void motorsWrite(float leftVelocity,float rightVelocity){
     rightVelocity *= -1;
     moveBackward(leftVelocity,rightVelocity);
   }else if(leftClockWise && !rightClockWise){
+    Serial.println("turning Right");
     rightVelocity *=-1;
     turnRight(leftVelocity,rightVelocity);
   }else if (!leftClockWise && rightClockWise){
+    Serial.println("turning left");
     leftVelocity *=-1;
     turnLeft(leftVelocity,rightVelocity);
   }
@@ -134,6 +142,7 @@ void changeAction (float directionLeft,float directionRight){
   
 void processResult(){
   char command = Serial.read();
+  Serial.println(command);
   switch(command){
     case 'F':
       changeAction(1,1);
