@@ -97,19 +97,22 @@ void moveForward(float leftClockVelocity, float rightClockVelocity){
 
 
 void turnRight(float leftClockVelocity,float rightAntiClockVelocity){
+
   if (leftClockVelocity<mini_turn_velocity || rightAntiClockVelocity<mini_turn_velocity){
     leftClockVelocity =mini_turn_velocity;
     rightAntiClockVelocity=mini_turn_velocity;
-  }
+ }
   lmClock(leftClockVelocity);
   rmAntiClock(rightAntiClockVelocity);
   }
 
 void turnLeft(float leftAntiClockVelocity,float rightClockVelocity){
+
   if (leftAntiClockVelocity<mini_turn_velocity || rightClockVelocity<mini_turn_velocity){
     leftAntiClockVelocity =mini_turn_velocity;                       
     rightClockVelocity=mini_turn_velocity;
   }
+
   lmAntiClock(leftAntiClockVelocity);
   rmClock(rightClockVelocity);
   }
