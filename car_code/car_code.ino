@@ -15,7 +15,7 @@ long timer;
 const long TIME_OUT=150;
 const int lowest_velocity = 25;
 int moving_velocity =255;
-
+int mini_turn_velocity=127.5;
 
 
 void setup() {
@@ -97,11 +97,19 @@ void moveForward(float leftClockVelocity, float rightClockVelocity){
 
 
 void turnRight(float leftClockVelocity,float rightAntiClockVelocity){
+  if (leftClockVelocity<mini_turn_velocity || rightAntiClockVelocity<mini_turn_velocity){
+    leftAnitClockVelocity =mini_turn_velocity;
+    rightAntiClockVelocity=mini_tunr_velocity;
+  }
   lmClock(leftClockVelocity);
   rmAntiClock(rightAntiClockVelocity);
   }
 
 void turnLeft(float leftAntiClockVelocity,float rightClockVelocity){
+  if (leftAntiClockVelocity<mini_turn_velocity || rightClockVelocity<mini_turn_velocity){
+    leftAnitClockVelocity =mini_turn_velocity;
+    rightAntiClockVelocity=mini_tunr_velocity;
+  }
   lmAntiClock(leftAntiClockVelocity);
   rmClock(rightClockVelocity);
   }
